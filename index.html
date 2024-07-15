@@ -4,8 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ESP32 Interface</title>
+    <script>
+        // Função para configurar e redirecionar para a URL do ngrok
+        function redirectToNgrok() {
+            fetch('https://c832-177-191-115-76.ngrok-free.app', {
+                method: 'GET',
+                headers: {
+                    'ngrok-skip-browser-warning': 'true'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    window.location.href = 'https://c832-177-191-115-76.ngrok-free.app';
+                } else {
+                    console.error('Erro ao redirecionar:', response.statusText);
+                }
+            })
+            .catch(error => {
+                console.error('Erro ao fazer a solicitação:', error);
+            });
+        }
+
+        // Chamar a função de redirecionamento quando a página for carregada
+        window.onload = redirectToNgrok;
+    </script>
 </head>
 <body>
-    <iframe src="https://c832-177-191-115-76.ngrok-free.app/" width="100%" height="600"></iframe>
+    <h1>Redirecionando...</h1>
 </body>
 </html>
