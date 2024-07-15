@@ -7,22 +7,17 @@
     <script>
         // Função para configurar e redirecionar para a URL do ngrok
         function redirectToNgrok() {
-            fetch('https://c832-177-191-115-76.ngrok-free.app', {
-                method: 'GET',
-                headers: {
-                    'ngrok-skip-browser-warning': 'true'
-                }
-            })
-            .then(response => {
-                if (response.ok) {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', 'https://c832-177-191-115-76.ngrok-free.app', true);
+            xhr.setRequestHeader('ngrok-skip-browser-warning', 'true');
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
                     window.location.href = 'https://c832-177-191-115-76.ngrok-free.app';
-                } else {
-                    console.error('Erro ao redirecionar:', response.statusText);
+                } else if (xhr.readyState === 4) {
+                    console.error('Erro ao redirecionar:', xhr.statusText);
                 }
-            })
-            .catch(error => {
-                console.error('Erro ao fazer a solicitação:', error);
-            });
+            };
+            xhr.send();
         }
 
         // Chamar a função de redirecionamento quando a página for carregada
